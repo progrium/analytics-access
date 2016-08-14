@@ -16,7 +16,9 @@ def get_access_token():
 
 @app.route("/token")
 def token():
-    return jsonify(**{"token": get_access_token()})
+    resp = make_response(jsonify(**{"token": get_access_token()}))
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    return resp
 
 if __name__ == "__main__":
     with open("json-key.json", "w") as f:
